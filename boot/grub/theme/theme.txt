@@ -1,0 +1,66 @@
+# Global properties
+title-text: ""
+desktop-image: "background.png"
+desktop-color: "#000000"
+terminal-font: "Unifont Regular 18"
+terminal-box: "terminal_box_*.png"
+terminal-left: "0"
+terminal-top: "0"
+terminal-width: "100%"
+terminal-height: "100%"
+terminal-border: "0"
+
+# Boot menu
++ boot_menu {
+#菜单框左端位置=屏幕左端30%处
+  left = 30%
+#菜单框顶端位置=屏幕上端10%处
+  top = 10%
+  #菜单框宽度=屏幕宽的60%
+  width = 50%
+#菜单框高度=屏幕高的80%
+  height = 80%
+  item_font = "Unifont Regular 18"
+#菜单项文字颜色="#777777"
+  item_color = "#777777"
+  item_height = 40
+#菜单项间距=4
+  item_spacing = 4
+ #选中的菜单项样式框="item_*.png"
+  item_pixmap_style = "item_*.png"
+  selected_item_pixmap_style = "selected_item_*.png"
+ #选中的菜单项文字颜色="#444444"
+  selected_item_color = "#444444"
+}
+
+# Countdown message
++ label {
+  left = 0
+  top = 100%-50
+  width = 100%
+  align = "center"
+  id = "__timeout__"
+  # EN
+  # text = "Booting in %d seconds"
+  # zh_CN
+  text = "高亮显示的项将在 %d 秒后执行..."
+  color = "#777777"
+  font = "Unifont Regular 18"
+}
+
+
+
+# Navigation keys hint 
++ label {
+  left = 0
+  top = 100%-24
+  width = 100%
+  align = "center"
+  # EN
+  # text = "Use ↑ and ↓ keys to change selection, Enter to confirm"
+  # zh_CN
+  text = "使用 ↑ 和 ↓ 键移动选择条，Enter 键确认"
+  color = "#777777"
+  font = "Unifont Regular 18"
+}
+

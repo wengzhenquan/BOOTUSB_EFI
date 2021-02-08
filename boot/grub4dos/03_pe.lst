@@ -1,0 +1,28 @@
+timeout 15
+default 1
+gfxmenu ()%g4ddir%/MESSAGEX || find --set-root %g4ddir%/MESSAGEX && %g4ddir%/MESSAGEX
+font ()%g4ddir%/MENU.HEX
+
+title [01] Porteus 4.0 PE >>
+configfile /porteus/menu.lst
+
+title [02] FierPE v1.70 >>
+configfile /FirPE/MENU.LST
+
+title [03] 运行 微PE Windows 10 x64
+find --set-root /WEPE/W10PE64_Bootmgr
+chainloader /WEPE/W10PE64_Bootmgr
+
+title [04] 运行 微PE Windows 8 x32(低配)
+find --set-root /WEPE/We8PE_32_V1.2_Bootmgr
+chainloader /WEPE/We8PE_32_V1.2_Bootmgr
+
+title [05] 启动 Windows 2003 PE (旧机型)
+find --set-root /WXPE/SETUPLDR.BIN
+chainloader /WXPE/SETUPLDR.BIN
+
+
+title [06] 返回主菜单 （上级）
+configfile %g4ddir%/2_MENU.LST
+
+

@@ -1,0 +1,20 @@
+﻿errorcheck off
+kernel /boot/grub/g2ldr
+boot
+find --set-root --ignore-floppies --ignore-cd /boot/grub/Core.img && kernel  /boot/grub/Core.img
+boot
+find --set-root --ignore-floppies --ignore-cd /efi/grub/Core.img && kernel  /efi/grub/Core.img
+boot
+kernel  /boot/grub/i386-pc/boot.img
+initrd  /boot/grub/Core.img
+boot
+configfile /boot/grub4dos/2_menu.lst
+boot
+find --set-root --ignore-floppies --ignore-cd /boot/grub4dos/2_menu.lst1 && configfile /boot/grub4dos/2_menu.lst
+find --set-root --devices=f /2_menu.lst && configfile /2_menu.lst
+find --set-root --ignore-floppies --ignore-cd /2_menu.lst && configfile /2_menu.lst
+errorcheck on
+font ()/boot/grub4dos/MENU.HEX
+pause --wait=30 GRUB2菜单启动失败,GRUB4DOS 菜单也启动失败！即将（或输入任意键）进入命令行。输入"reboot"重启，输入"halt"关机！
+commandline
+

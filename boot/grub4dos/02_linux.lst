@@ -1,0 +1,23 @@
+timeout 15
+default 1
+gfxmenu ()%g4ddir%/MESSAGEX || find --set-root %g4ddir%/MESSAGEX && %g4ddir%/MESSAGEX
+font ()%g4ddir%/MENU.HEX
+
+title [01] Porteus 4.0 PE >>
+configfile /porteus/menu.lst
+
+
+title [02] WifiSlax x64 2.2-final >>
+configfile /wifislax64/BOOT/menu.lst
+boot
+
+title [03] WifiSlax x32 5.1汉化版 >>
+configfile /wifislax/MENU.LST
+
+title [04] Kali Linux 菜单>>
+configfile /live/boot/menu.lst
+boot
+
+
+title [05] 返回主菜单 （上级）
+configfile %g4ddir%/2_MENU.LST

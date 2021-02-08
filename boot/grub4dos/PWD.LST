@@ -1,0 +1,60 @@
+﻿timeout 15
+default 6
+gfxmenu ()%g4ddir%/MESSAGEX || find --set-root %g4ddir%/MESSAGEX &&  %g4ddir%/MESSAGEX
+font ()%g4ddir%/MENU.HEX
+                           
+title [01] 使用 KonBoot2.5 绕过密码(模式一)
+map --mem ()%toolsdir%/kon.img (fd0) || find --set-root %toolsdir%/kon.img && map --mem %toolsdir%/kon.img (fd0)
+map --hook
+chainloader (fd0)+1
+map (hd1) (hd0)
+map --hook
+rootnoverify (fd0)
+
+title [02] 使用 KonBoot2.5 绕过密码(模式二)
+echo $[1106] Loading Password TOOL, Please Wait ...
+map --mem ()%toolsdir%/kon.img (fd0) || find --set-root %toolsdir%/kon.img && map --mem %toolsdir%/kon.img (fd0)
+map --hook
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [03] 使用 KonBoot2.4 绕过密码(模式一)
+map --mem ()%toolsdir%/kons.img (fd0) || find --set-root %toolsdir%/kons.img && map --mem %toolsdir%/kons.img (fd0)
+map --hook
+chainloader (fd0)+1
+map (hd1) (hd0)
+map --hook
+rootnoverify (fd0)
+
+title [04] 使用 KonBoot2.4 绕过密码(模式二)
+echo $[1106] Loading Password TOOL, Please Wait ...
+map --mem ()%toolsdir%/kons.img (fd0) || find --set-root %toolsdir%/kons.img && map --mem %toolsdir%/kons.img (fd0)
+map --hook
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [05] 清除 Windows用户密码（中文）
+terminal console
+echo $[0x0C]  Loading Password TOOL, Please Wait ...
+map --mem %toolsdir%/DOS.LZMA (fd0)
+map --rehook
+dd if=(fd0)/config.sys of=(fd0)/config.sys bs=1 skip=65 count=1 seek=185
+write --offset=1010 (fd0)/autoexec.bat call pwd.bat c
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [06] 清除 Windows用户密码（英文）
+terminal console
+echo $[0x0C] Loading Password TOOL, Please Wait ...
+map --mem %toolsdir%/DOS.LZMA (fd0)
+map --rehook
+dd if=(fd0)/config.sys of=(fd0)/config.sys bs=1 skip=65 count=1 seek=185
+write --offset=1010 (fd0)/autoexec.bat call pwd.bat e
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [07] 返回上一级菜单
+configfile %g4ddir%/TOOL.LST
+
+title [08] 返回主菜单
+configfile %g4ddir%/2_MENU.LST

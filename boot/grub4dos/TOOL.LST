@@ -1,0 +1,46 @@
+﻿timeout 15
+default 7
+gfxmenu ()%g4ddir%/MESSAGEX || find --set-root %g4ddir%/MESSAGEX && %g4ddir%/MESSAGEX
+font ()%g4ddir%/MENU.HEX
+
+title [01] 运行 OneKey  备份还原
+map --mem %toolsdir%/DOS.LZMA (fd0)
+map --hook
+dd if=(fd0)/config.sys of=(fd0)/config.sys bs=1 skip=65 count=1 seek=185
+write --offset=1010 (fd0)/autoexec.bat call gh.bat
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [02] 运行 DiskGen 磁盘分区
+map --unmap=0
+map --mem %toolsdir%/DG.IMG (fd0)
+map --hook
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [03] 运行 MaxDos 9.3 工具箱
+terminal console
+pause --wait=0  Loading DOS tool ...
+map --mem /BootTools/IMGS/DOS.IMG (fd0)
+map --hook
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [04] 运行 MaxDos 9.0 工具箱
+terminal console
+pause --wait=0  Loading DOS tool ...
+map --mem %toolsdir%/DOS.LZMA (fd0)
+map --hook
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [05] 运行 硬盘与内存 检测>>
+configfile %g4ddir%/RAMHDD.LST   
+
+title [06] 运行 Windows密码破解>>
+configfile %g4ddir%/PWD.LST
+
+title [07] 返回主菜单 （上级）
+configfile %g4ddir%/2_MENU.LST
+
+

@@ -1,0 +1,54 @@
+﻿timeout 25
+default 0 
+set g4ddir=/Boot/grub4dos
+set toolsdir=/BootTools/IMGS
+call Fn.0 0x40000 "!BAT\necho -P:0000 $[0000]\t\t\t\t\t\t\t\t\t\0" && initscript (md)0x200+1
+gfxmenu ()%g4ddir%/MESSAGEX || find --set-root %g4ddir%/MESSAGEX && %g4ddir%/MESSAGEX
+font ()%g4ddir%/MENU.HEX
+default ()/boot/grub4dos/default
+
+title [01] PE 系统 >>
+configfile %g4ddir%/03_pe.lst
+
+title [02] Linux 系统 >>
+configfile %g4ddir%/02_linux.lst
+
+title [03] 运行 资源管理器
+map --mem %toolsdir%/grubfm.ISO (hd32) 
+map --hook
+chainloader (hd32) 
+savedefault --wait=2
+
+
+title [04] 自定义iso镜像
+graphicsmode -1 640
+font %g4ddir%/MENU.HEX
+command %g4ddir%/RUN --automenu-all /ISO/
+
+title [05] 运行更多工具 >>
+configfile  %g4ddir%/TOOL.LST
+
+
+title [06] 启动 grub2 菜单 >>
+find --set-root --ignore-floppies --ignore-cd  /boot/grub/g2ldr
+kernel /boot/grub/g2ldr
+boot
+
+
+title [07] 从硬盘启动
+root (bd) || echo $[1106] Loading Local System, Please Wait ...
+if exist mydm if exist F11s || if not exist  %g4ddir%/SISO && root (0xff) || echo
+if exist mydm if exist F11s || if not exist ()%g4ddir%/SISO echo && find --set-root  %g4ddir%/SISO || pause  %g4ddir%/SISO not found. && goto 0
+map (hd-1) (hd-1) && map --rehook  
+ %g4ddir%/SISO NTBOOT || pause Return from SISO and reboot.
+reboot
+
+title [08] dos命令
+commandline
+
+title [09] 重启计算机
+reboot
+
+title [00] 关闭计算机
+halt
+

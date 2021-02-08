@@ -1,0 +1,47 @@
+﻿timeout 15
+default 6
+gfxmenu ()%g4ddir%/MESSAGEX || find --set-root %g4ddir%/MESSAGEX && %g4ddir%/MESSAGEX
+font ()%g4ddir%/MENU.HEX
+
+title  [01] MemTest 5.0 内存检测
+map --mem %toolsdir%/MEMTEST.IMG (fd0)
+map --hook
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title  [02] MemTest 4.2 内存检测
+kernel %toolsdir%/MT42.BIN
+
+title  [03] WinDiag 内存检测
+map --mem %toolsdir%/WINDIAG.LZMA (fd0)
+map --hook
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title  [04] MHDD 4.6 硬盘检测
+map --mem %toolsdir%/MHDD46.LZMA (fd0)
+map --hook
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title  [05] MHDD 2.9 硬盘检测
+map --mem %toolsdir%/DOS.LZMA (fd0)
+map --hook
+dd if=(fd0)/config.sys of=(fd0)/config.sys bs=1 skip=65 count=1 seek=185
+write --offset=1010 (fd0)/autoexec.bat call mhdd.bat c
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title  [06] HddReg 硬盘再生器
+map --mem %toolsdir%/DOS.LZMA (fd0)
+map --hook
+dd if=(fd0)/config.sys of=(fd0)/config.sys bs=1 skip=65 count=1 seek=185
+write --offset=1010 (fd0)/autoexec.bat call hddreg.bat
+chainloader (fd0)+1
+rootnoverify (fd0)
+
+title [07] 返回上一级菜单
+configfile %g4ddir%/TOOL.LST
+
+title [08] 返回主菜单
+configfile %g4ddir%/2_MENU.LST
