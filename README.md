@@ -23,3 +23,10 @@ FirPE 文件夹：
 实例下载地址：
 
 https://cloud.189.cn/t/7FfQRrU3qURb (访问码:bp49)
+
+![image](https://user-images.githubusercontent.com/23743586/158731398-950ead5e-8892-4408-a0fc-d124cf05d15e.png)
+
+
+
+![image](https://user-images.githubusercontent.com/23743586/158731739-19be04b0-7294-4385-a7a6-1566d3a2ca89.png)
+
